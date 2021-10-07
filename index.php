@@ -3,7 +3,7 @@
 include_once 'classes/Car.php';
 
 
-$car = new Car('Peugeot', '607', 2010, 'green');
+$car = new Car('Peugeot', '607', 2010, 'green', 5);
 
 
 /*
@@ -28,5 +28,17 @@ $car->stop();
 $car->stop();
 $car->start();
 $car->speedUp();
-
-
+$car->speedUp();
+$car->speedUp();
+$car->speedUp();
+$car->speedUp();
+$car->speedUp();
+$car->speedDown();
+$car->speedDown();
+$car->speedDown();
+$car->speedDown();
+$car->speedDown();
+$car->speedDown();
+$car->speedDown();
+$car->speedUp();
+$car->speedUp();

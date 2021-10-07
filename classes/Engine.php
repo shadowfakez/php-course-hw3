@@ -22,17 +22,11 @@ class Engine
 
     public function stop()
     {
-        /*
-         * stop engine
-         * выключаем двигатель - текущая скорость 0 км/ч
-         * если пытаемся выключить двигатель на скорости более 5 км/ч
-         * выключить двигатель на скорости х невозможно - необходимо сбросить скорость
-         * если пытаемся выключить двигатель, который уже выключен
-         * двигатель уже выключен
-         * */
-        if ($this->engineRunning) {
+        if ($this->engineRunning and $this->currentSpeed == 0) {
             echo 'Останавливаем двигатель! Текущая скорость: ' . $this->currentSpeed . ' км/ч' . PHP_EOL;
             $this->engineRunning = false;
+        }else if ($this->engineRunning and $this->currentSpeed !== 0) {
+            echo "Невозможно остановить двигатель на ходу! Необходимо сбросить скорость. Текущая скорость: " . $this->currentSpeed . " км/ч'" . PHP_EOL;
         } else {
             echo 'Двигатель уже остановлен! Невозможно остановить повторно!' . PHP_EOL;
         }
