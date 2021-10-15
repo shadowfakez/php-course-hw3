@@ -1,10 +1,7 @@
 <?php
 
-include_once 'Transmission.php';
-include_once './interfaces/MovableInterface.php';
-include_once './interfaces/ReverseMovableInterface.php';
 
-class Car extends Transmission implements MovableInterface, ReverseMovableInterface
+class Car extends AutomaticTransmission
 {
     protected string $brand;
 
@@ -23,33 +20,9 @@ class Car extends Transmission implements MovableInterface, ReverseMovableInterf
         $this->color = $color;
     }
 
-    public function getCarInfo(): string
+    public function getInfo()
     {
-        return 'Информация об автомобиле:' . PHP_EOL . 'Автомобиль марки ' . $this->brand . ', модель ' . $this->model . ', ' . $this->year . ' года выпуска. Цвет: ' . $this->color . '. Максимальная скорость: ' . $this->maxSpeed . ' км/ч.' . PHP_EOL;
+        echo 'Информация об автомобиле:' . PHP_EOL . 'Автомобиль марки ' . $this->brand . ', модель ' . $this->model . ', ' . $this->year . ' года выпуска. Цвет: ' . $this->color . '. Максимальная скорость: ' . $this->maxSpeed . ' км/ч.' . PHP_EOL;
     }
 
-    public function start()
-    {
-        parent::startEngine();
-    }
-
-    public function stop()
-    {
-        parent::stopEngine();
-    }
-
-    public function up()
-    {
-        parent::speedUp();
-    }
-
-    public function down()
-    {
-        parent::speedDown();
-    }
-
-    public function reverse()
-    {
-        parent::reverseMoving();
-    }
 }

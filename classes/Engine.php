@@ -2,14 +2,14 @@
 
 
 
-abstract class Engine
+abstract class Engine implements MovableInterface, ReverseMovableInterface
 {
 
     protected int $currentSpeed = 0; // текущая скорость
 
     protected bool $engineRunning = false; // работает ли двигатель сейчас
 
-    public function startEngine()
+    public function start()
     {
         if ($this->engineRunning) {
             echo 'Двигатель уже работает! Невозможно завестись повторно!' . PHP_EOL;
@@ -19,10 +19,10 @@ abstract class Engine
         }
     }
 
-    public function stopEngine()
+    public function stop()
     {
         if ($this->engineRunning and $this->currentSpeed == 0) {
-            echo 'Останавливаем двигатель! Текущая скорость: ' . $this->currentSpeed . ' км/ч.' . PHP_EOL;
+            echo 'Текущая скорость: ' . $this->currentSpeed . ' км/ч. Останавливаем двигатель! ' . PHP_EOL;
             $this->engineRunning = false;
         }else if ($this->engineRunning and $this->currentSpeed !== 0) {
             echo "Невозможно остановить двигатель на ходу! Необходимо сбросить скорость. Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
@@ -31,9 +31,11 @@ abstract class Engine
         }
     }
 
-    abstract function speedUp();
+    abstract public function up();
 
-    abstract function speedDown();
+    abstract public function down();
+
+    abstract public function reverse();
 
 
 
