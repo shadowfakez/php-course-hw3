@@ -14,7 +14,7 @@ abstract class Transmission extends Engine
 
     const MANUAL_SPEEDSTEP5 = 50; // шаг изменения скорости на 5 передаче
 
-    const AUTO_SPEEDSTEP = 50; // шаг изменения скорости
+    const AUTO_SPEEDSTEP = 50; // шаг изменения скорости на автоматической КПП
 
     const REVERSE = 5; // шаг изменения скорости R передаче
 
