@@ -1,68 +1,48 @@
 <?php
 
 
-class ManualTransmission extends Engine
+class ManualTransmission extends Transmission
 {
-    protected int $maxSpeed; // максимальная скорость
-
-    protected static int $currentGear = 0; // работающая передача
-
-    const SPEEDSTEP1 = 5; // шаг изменения скорости на 1 передаче
-
-    const SPEEDSTEP2 = 10; // шаг изменения скорости на 2 передаче
-
-    const SPEEDSTEP3 = 15; // шаг изменения скорости на 3 передаче
-
-    const SPEEDSTEP4 = 25; // шаг изменения скорости на 4 передаче
-
-    const SPEEDSTEP5 = 50; // шаг изменения скорости на 5 передаче
-
-    const REVERSE = 5; // шаг изменения скорости R передаче
+    protected int $currentGear = 0; // работающая передача
 
     public function __construct($maxSpeed)
     {
         $this->maxSpeed = $maxSpeed;
     }
 
-    public function speedUpOutput(): string
+    protected function speedUpOutput(): string
     {
-        return "Набираем скорость! Двигатель работает на " . self::$currentGear . " передаче! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
+        return "Набираем скорость! Двигатель работает на " . $this->currentGear . " передаче! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
     }
 
-    public function speedDownOutput(): string
+    protected function speedDownOutput(): string
     {
-        return "Сбрасываем скорость! Двигатель работает на " . self::$currentGear . " передаче! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
+        return "Сбрасываем скорость! Двигатель работает на " . $this->currentGear . " передаче! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
     }
-
-    public function reverseMovingOutput(): string
-    {
-        return "Задний ход! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
-    }
-
 
     public function up()
     {
         if ($this->engineRunning) {
             if ($this->currentSpeed >= 0) {
                 if ($this->currentSpeed <= 30) {
-                    self::$currentGear = 1;
-                    $this->currentSpeed += self::SPEEDSTEP1;
+                    $this->currentGear = 1;
+                    $this->currentSpeed += self::MANUAL_SPEEDSTEP1;
                     echo $this->speedUpOutput();
                 } elseif ($this->currentSpeed <= 45) {
-                    self::$currentGear = 2;
-                    $this->currentSpeed += self::SPEEDSTEP2;
+                    $this->currentGear = 2;
+                    $this->currentSpeed += self::MANUAL_SPEEDSTEP2;
                     echo $this->speedUpOutput();
                 } elseif ($this->currentSpeed <= 90) {
-                    self::$currentGear = 3;
-                    $this->currentSpeed += self::SPEEDSTEP3;
+                    $this->currentGear = 3;
+                    $this->currentSpeed += self::MANUAL_SPEEDSTEP3;
                     echo $this->speedUpOutput();
                 } elseif ($this->currentSpeed <= 165) {
-                    self::$currentGear = 4;
-                    $this->currentSpeed += self::SPEEDSTEP4;
+                    $this->currentGear = 4;
+                    $this->currentSpeed += self::MANUAL_SPEEDSTEP4;
                     echo $this->speedUpOutput();
                 } else {
-                    self::$currentGear = 5;
-                    $this->currentSpeed += self::SPEEDSTEP5;
+                    $this->currentGear = 5;
+                    $this->currentSpeed += self::MANUAL_SPEEDSTEP5;
                     if ($this->currentSpeed >= $this->maxSpeed) {
                         $this->currentSpeed = $this->maxSpeed;
                         echo 'Достигнута максимальная скорость ' . $this->currentSpeed . ' км/ч! Дальнейшее ускорение невозможно.' . PHP_EOL;
@@ -83,28 +63,28 @@ class ManualTransmission extends Engine
         if ($this->engineRunning) {
             if ($this->currentSpeed > 0) {
                 if ($this->currentSpeed <= 15) {
-                    self::$currentGear = 1;
-                    $this->currentSpeed -= self::SPEEDSTEP1;
+                    $this->currentGear = 1;
+                    $this->currentSpeed -= self::MANUAL_SPEEDSTEP1;
                     echo $this->speedDownOutput();
                 } elseif ($this->currentSpeed <= 45) {
-                    self::$currentGear = 2;
-                    $this->currentSpeed -= self::SPEEDSTEP2;
+                    $this->currentGear = 2;
+                    $this->currentSpeed -= self::MANUAL_SPEEDSTEP2;
                     echo $this->speedDownOutput();
                 } elseif ($this->currentSpeed <= 90) {
-                    self::$currentGear = 3;
-                    $this->currentSpeed -= self::SPEEDSTEP3;
+                    $this->currentGear = 3;
+                    $this->currentSpeed -= self::MANUAL_SPEEDSTEP3;
                     echo $this->speedDownOutput();
                 } elseif ($this->currentSpeed <= 165) {
-                    self::$currentGear = 4;
-                    $this->currentSpeed -= self::SPEEDSTEP4;
+                    $this->currentGear = 4;
+                    $this->currentSpeed -= self::MANUAL_SPEEDSTEP4;
                     echo $this->speedDownOutput();
                 } else {
-                    self::$currentGear = 5;
-                    $this->currentSpeed -= self::SPEEDSTEP5;
+                    $this->currentGear = 5;
+                    $this->currentSpeed -= self::MANUAL_SPEEDSTEP5;
                     echo $this->speedDownOutput();
                 }
             } elseif ($this->currentSpeed < 0) {
-                $this->currentSpeed += self::SPEEDSTEP1;
+                $this->currentSpeed += self::MANUAL_SPEEDSTEP1;
                 echo "Сбавляем скорость! Задний ход! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
             } else {
                 echo "Текущая скорость: " . $this->currentSpeed . " км/ч. Чтобы двигаться вперед, нажмите на газ. Чтобы двигаться назад, запустите задний ход!" . PHP_EOL;

@@ -1,34 +1,22 @@
 <?php
 
 
-class AutomaticTransmission extends Engine
+class AutomaticTransmission extends Transmission
 {
-    protected int $maxSpeed; // максимальная скорость
-
-    const SPEEDSTEP = 50; // шаг изменения скорости
-
-    const REVERSE = 5; // шаг изменения скорости R передаче
-
     public function __construct($maxSpeed)
     {
         $this->maxSpeed = $maxSpeed;
     }
 
-    public function speedUpOutput(): string
+    protected function speedUpOutput(): string
     {
         return "Набираем скорость! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
     }
 
-    public function speedDownOutput(): string
+    protected function speedDownOutput(): string
     {
         return "Сбрасываем скорость! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
     }
-
-    public function reverseMovingOutput(): string
-    {
-        return "Задний ход! Текущая скорость: " . $this->currentSpeed . " км/ч." . PHP_EOL;
-    }
-
 
     public function up()
     {
@@ -38,7 +26,7 @@ class AutomaticTransmission extends Engine
                     $this->currentSpeed = $this->maxSpeed;
                     echo 'Достигнута максимальная скорость ' . $this->currentSpeed . ' км/ч! Дальнейшее ускорение невозможно.' . PHP_EOL;
                 } else {
-                    $this->currentSpeed += self::SPEEDSTEP;
+                    $this->currentSpeed += self::AUTO_SPEEDSTEP;
                     echo $this->speedUpOutput();
                 }
             } else {
@@ -53,7 +41,7 @@ class AutomaticTransmission extends Engine
     {
         if ($this->engineRunning) {
             if ($this->currentSpeed > 0) {
-                $this->currentSpeed -= self::SPEEDSTEP;
+                $this->currentSpeed -= self::AUTO_SPEEDSTEP;
                 echo $this->speedDownOutput();
             } elseif ($this->currentSpeed < 0) {
                 $this->currentSpeed += self::REVERSE;

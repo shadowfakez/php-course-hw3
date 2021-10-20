@@ -1,23 +1,15 @@
 <?php
 
 
-class Motorcycle extends ManualTransmission
+class Motorcycle extends Vehicle
 {
-    protected string $brand;
-
-    protected mixed $model;
-
-    protected int $year;
-
-    protected string $color;
+    protected Transmission $transmission;
 
     public function __construct($brand, $model, $year, $color, $maxSpeed)
     {
-        parent::__construct($maxSpeed);
-        $this->brand = $brand;
-        $this->model = $model;
-        $this->year = $year;
-        $this->color = $color;
+        parent::__construct($brand, $model, $year, $color, $maxSpeed);
+
+        $this->transmission = new ManualTransmission($maxSpeed);
     }
 
     public function getInfo()

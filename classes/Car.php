@@ -1,28 +1,21 @@
 <?php
 
 
-class Car extends AutomaticTransmission
+class Car extends Vehicle
 {
-    protected string $brand;
-
-    protected mixed $model;
-
-    protected int $year;
-
-    protected string $color;
+    protected Transmission $transmission;
 
     public function __construct($brand, $model, $year, $color, $maxSpeed)
     {
-        parent::__construct($maxSpeed);
-        $this->brand = $brand;
-        $this->model = $model;
-        $this->year = $year;
-        $this->color = $color;
+        parent::__construct($brand, $model, $year, $color, $maxSpeed);
+
+        $this->transmission = new AutomaticTransmission($maxSpeed);
     }
 
     public function getInfo()
     {
         echo 'Информация об автомобиле:' . PHP_EOL . 'Автомобиль марки ' . $this->brand . ', модель ' . $this->model . ', ' . $this->year . ' года выпуска. Цвет: ' . $this->color . '. Максимальная скорость: ' . $this->maxSpeed . ' км/ч.' . PHP_EOL;
     }
+
 
 }
